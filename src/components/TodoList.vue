@@ -2,14 +2,14 @@
   <div>
     Todo List
     <div
-      v-for="(item, index) in items"
+      v-for="(item, index) in filteredItems"
       :key="index"
-      :style="item.status && 'color:green'"
+      :style="item.completed && 'color:green'"
     >
       <input
         type="checkbox"
         @change="() => changeStatus(index)"
-        :checked="item.status"
+        :checked="item.completed"
       />
       {{ item.content }}
       <button @click="() => removeItem(index)">-</button>
@@ -21,7 +21,8 @@
 export default {
   name: "TodoList",
   props: {
-    items: Array
+    items: Array,
+    filter: String
   },
   methods: {
     removeItem(index) {
@@ -29,6 +30,24 @@ export default {
     },
     changeStatus(index) {
       this.$emit("changeStatus", index);
+    }
+  },
+  computed:{
+    filteredItems(){
+      if(!this.items.length){
+        return [];
+      }
+      switch(this.filter){
+        case "pending":
+          return this.items.filter(item => !item.completed && !item.deleted)
+        case "deleted":
+          return this.items.filter(item => item.deleted)
+        case "completed":
+          return this.items.filter(item => item.completed && !item.deleted)
+        case "all":
+        default:
+          return this.items;
+      }
     }
   }
 };

@@ -1,7 +1,7 @@
 <template>
   <div>
     <TodoInput @addItem="add" />
-    <TodoList :items="items" @changeStatus="changeStatus" @remove="remove" />
+    <TodoList :filter="filter" :items="items" @changeStatus="changeStatus" @remove="remove" />
   </div>
 </template>
 
@@ -18,10 +18,13 @@ export default {
   data() {
     return {
       items: [
-        { status: false, content: "Task 1" },
-        { status: false, content: "Task 2" },
-        { status: false, content: "Task 3" }
-      ]
+        { completed: false, content: "Task 1", deleted: false },
+        { completed: false, content: "Task 2", deleted: false },
+        { completed: false, content: "Task 3", deleted: false },
+        { completed: true, content: "Task 4 deleted", deleted: true },
+        { completed: true, content: "Task 5 completed", deleted: false }
+      ],
+      filter: "all"
     };
   },
   methods: {
@@ -34,7 +37,7 @@ export default {
       this.items.splice(index, 1);
     },
     changeStatus(index) {
-      this.items[index].status = !this.items[index].status;
+      this.items[index].completed = !this.items[index].completed;
     }
   }
 };
