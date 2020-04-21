@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TodoInput @create="agregarItem"/>
+    <TodoInput @crear="agregarItem"/>
     <TodoList :items="items" @borrar="borrarItem"/>
   </div>
 </template>
