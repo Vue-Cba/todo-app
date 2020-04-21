@@ -1,7 +1,7 @@
 <template>
   <div>
     <TodoInput @create="agregarItem"/>
-    <TodoList :items="items" />
+    <TodoList :items="items" @borrar="borrarItem"/>
   </div>
 </template>
 
@@ -26,6 +26,9 @@ export default {
     agregarItem(item){
       const newIndex = this.items.length;
       this.items.splice(newIndex, 0, item);
+    },
+    borrarItem(index){
+      this.items.splice(index, 1);
     }
   }
 };
