@@ -1,7 +1,7 @@
 <template>
   <div>
     <TodoInput />
-    <TodoList />
+    <TodoList :items="items" />
   </div>
 </template>
 
@@ -14,7 +14,14 @@ export default {
   components: {
     TodoInput,
     TodoList
-  }
+  },
+  data(){return{
+    items: [
+      "Task 1",
+      "Task 2",
+      "Task 3"
+    ]
+  }}
 };
 </script>
 
