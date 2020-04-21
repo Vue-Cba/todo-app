@@ -1,7 +1,7 @@
 <template>
   <div>
-    <TodoInput @crear="agregarItem"/>
-    <TodoList :items="items" @borrar="borrarItem"/>
+    <TodoInput @addItem="add" />
+    <TodoList :items="items" @changeStatus="changeStatus" @remove="remove" />
   </div>
 </template>
 
@@ -15,20 +15,26 @@ export default {
     TodoInput,
     TodoList
   },
-  data(){return{
-    items: [
-      "Task 1",
-      "Task 2",
-      "Task 3"
-    ]
-  }},
-  methods:{
-    agregarItem(item){
+  data() {
+    return {
+      items: [
+        { status: false, content: "Task 1" },
+        { status: false, content: "Task 2" },
+        { status: false, content: "Task 3" }
+      ]
+    };
+  },
+  methods: {
+    add(content) {
       const newIndex = this.items.length;
-      this.items.splice(newIndex, 0, item);
+      const newItem = { status: false, content: content };
+      this.items.splice(newIndex, 0, newItem);
     },
-    borrarItem(index){
+    remove(index) {
       this.items.splice(index, 1);
+    },
+    changeStatus(index) {
+      this.items[index].status = !this.items[index].status;
     }
   }
 };
