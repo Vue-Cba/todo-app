@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TodoInput />
+    <TodoInput @create="agregarItem"/>
     <TodoList :items="items" />
   </div>
 </template>
@@ -21,7 +21,13 @@ export default {
       "Task 2",
       "Task 3"
     ]
-  }}
+  }},
+  methods:{
+    agregarItem(item){
+      const newIndex = this.items.length;
+      this.items.splice(newIndex, 0, item);
+    }
+  }
 };
 </script>
 
