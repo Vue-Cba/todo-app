@@ -1,19 +1,27 @@
 <template>
   <div>
     <TodoInput @addItem="add" />
-    <TodoList :filter="filter" :items="items" @changeStatus="changeStatus" @remove="remove" />
+    <TodoList
+      :filter="filter"
+      :items="items"
+      @changeStatus="changeStatus"
+      @remove="remove"
+    />
+    <TodoFilters v-model="filter" />
   </div>
 </template>
 
 <script>
 import TodoInput from "./TodoInput";
 import TodoList from "./TodoList";
+import TodoFilters from "./TodoFilters";
 
 export default {
   name: "TodoView",
   components: {
     TodoInput,
-    TodoList
+    TodoList,
+    TodoFilters
   },
   data() {
     return {

@@ -32,18 +32,18 @@ export default {
       this.$emit("changeStatus", index);
     }
   },
-  computed:{
-    filteredItems(){
-      if(!this.items.length){
+  computed: {
+    filteredItems() {
+      if (!this.items.length) {
         return [];
       }
-      switch(this.filter){
+      switch (this.filter) {
         case "pending":
-          return this.items.filter(item => !item.completed && !item.deleted)
+          return this.items.filter(item => !item.completed && !item.deleted);
         case "deleted":
-          return this.items.filter(item => item.deleted)
+          return this.items.filter(item => item.deleted);
         case "completed":
-          return this.items.filter(item => item.completed && !item.deleted)
+          return this.items.filter(item => item.completed && !item.deleted);
         case "all":
         default:
           return this.items;
